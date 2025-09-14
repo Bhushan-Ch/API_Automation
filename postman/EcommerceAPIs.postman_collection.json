@@ -1,0 +1,96 @@
+{
+  "info": {
+    "_postman_id": "11111111-2222-3333-4444-555555555555",
+    "name": "Ecommerce APIs",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "User Login",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"email\": \"testuser@example.com\",\n    \"password\": \"Password123\"\n}"
+        },
+        "url": {
+          "raw": "https://api.automationecommerce.com/auth/login",
+          "protocol": "https",
+          "host": ["api", "automationecommerce", "com"],
+          "path": ["auth", "login"]
+        }
+      }
+    },
+    {
+      "name": "Get Product List",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://api.automationecommerce.com/products",
+          "protocol": "https",
+          "host": ["api", "automationecommerce", "com"],
+          "path": ["products"]
+        }
+      }
+    },
+    {
+      "name": "Add to Cart",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{authToken}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"productId\": \"12345\",\n    \"quantity\": 2\n}"
+        },
+        "url": {
+          "raw": "https://api.automationecommerce.com/cart/add",
+          "protocol": "https",
+          "host": ["api", "automationecommerce", "com"],
+          "path": ["cart", "add"]
+        }
+      }
+    },
+    {
+      "name": "Place Order",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{authToken}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"address\": \"123 Main St, India\",\n    \"paymentMode\": \"COD\"\n}"
+        },
+        "url": {
+          "raw": "https://api.automationecommerce.com/order/place",
+          "protocol": "https",
+          "host": ["api", "automationecommerce", "com"],
+          "path": ["order", "place"]
+        }
+      }
+    }
+  ]
+}

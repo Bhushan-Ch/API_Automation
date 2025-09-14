@@ -1,0 +1,54 @@
+pipeline {
+    agent any
+
+    tools {
+        maven 'Maven_3.9'   // configure Maven in Jenkins (Manage Jenkins → Global Tool Configuration)
+        jdk 'Java_11'       // configure JDK in Jenkins
+    }
+
+    stages {
+        stage('Checkout Code') {
+            steps {
+                git branch: 'main',
+                    url: 'https://github.com/your-repo/automation-project.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                echo "Running Maven Clean and Compile"
+                sh 'mvn clean compile'
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                echo "Executing TestNG Tests"
+                sh 'mvn test'
+            }
+        }
+
+        stage('Publish Reports') {
+            steps {
+                echo "Publishing TestNG/JUnit Reports"
+                junit '**/target/surefire-reports/*.xml'
+
+                // If you use Allure, uncomment below:
+                // allure includeProperties: false, jdk: '', results: [[path: 'target/allure-results']]
+            }
+        }
+    }
+
+    post {
+        success {
+            echo '✅ Test Execution Successful!'
+        }
+        failure {
+            echo '❌ Test Execution Failed!'
+        }
+        always {
+            echo 'Pipeline completed. Cleaning workspace...'
+            cleanWs()
+        }
+    }
+}
