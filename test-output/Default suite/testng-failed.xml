@@ -9,6 +9,12 @@
           <include name="createUserTest"/>
         </methods>
       </class> <!-- tests.CreateUserTest -->
+      <class name="tests.LoginTest">
+        <methods>
+          <include name="setup"/>
+          <include name="loginWithValidCredentials"/>
+        </methods>
+      </class> <!-- tests.LoginTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
